@@ -22,17 +22,32 @@ When you access the application, it responds in the following format:
 │ ├── app.py
 │ ├── requirements.txt
 │ └── Dockerfile
+├── terraform/
+│ ├── main.tf
+│ ├── variables.tf
+│ ├── provider.tf
+│ ├── iam.tf
+│ ├── logs.tf
+│ └── outputs.tf
 └── README.md
 
 ## Tech used
 - Python
 - FastAPI
+- Docker- Python (FastAPI)
 - Docker
+- AWS ECR
+- AWS ECS (Fargate)
+- Application Load Balancer (ALB)
+- Terraform
 
 ## What do you need?
 Before starting, make sure you have:
 - Docker installed
-- Git installed
+- Git installed Docker installed
+- AWS CLI configured
+- Terraform installed
+- An AWS account
 
 No cloud account or extra tools are required to run the app locally.
 
@@ -55,6 +70,51 @@ Result be
 }
 
 To stop the container, press CTRL + C.
+
+Pushing the image to Amazon ECR
+Create the ECR repository (one-time)
+aws ecr create-repository --repository-name visitor-app --region us-east-1
+
+To Authenticate Docker to ECR
+aws ecr get-login-password --region us-east-1 \
+| docker login --username AWS --password-stdin <ACCOUNT_ID>.dkr.ecr.us-east-1.amazonaws.com
+
+To Tag and push the image
+docker tag visitor-app:latest <ACCOUNT_ID>.dkr.ecr.us-east-1.amazonaws.com/visitor-app:latest
+docker push <ACCOUNT_ID>.dkr.ecr.us-east-1.amazonaws.com/visitor-app:latest
+
 To remove the Docker image:
 
 docker rmi visitor-app
+
+Deploy the infrastructure
+cd terraform
+terraform init
+terraform plan
+terraform apply
+
+
+After the apply completes, Terraform outputs the public ALB URL:
+
+application_url = visitor-app-xxxxxx.us-east-1.elb.amazonaws.com
+
+Accessing the deployed application
+
+Open the ALB URL in a browser:
+
+http://visitor-app-2031529899.us-east-1.elb.amazonaws.com
+
+
+You should receive a response similar to:
+
+{
+  "timestamp": "2025-12-16T14:35:19.239611",
+  "ip": "x.x.x.x"
+}
+
+To Cleanup 
+
+To avoid ongoing AWS charges, destroy all resources when finished:
+
+cd terraform
+terraform destroy
