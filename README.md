@@ -118,3 +118,62 @@ To avoid ongoing AWS charges, destroy all resources when finished:
 
 cd terraform
 terraform destroy
+
+
+---
+
+## Code References
+
+The following official documentation and references were used while designing and implementing this project:
+
+### Application & Framework
+- FastAPI documentation  
+  https://fastapi.tiangolo.com/
+
+- Uvicorn ASGI server  
+  https://www.uvicorn.org/
+
+### Docker
+- Dockerfile best practices  
+  https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
+
+- Running containers as a non-root user  
+  https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#user
+
+### AWS ECS & Fargate
+- Amazon ECS Developer Guide  
+  https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html
+
+- ECS task definitions  
+  https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html
+
+- ECS Fargate launch type  
+  https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html
+
+### Application Load Balancer
+- Application Load Balancer documentation  
+  https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html
+
+- Target groups for ALB  
+  https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html
+
+### Amazon ECR
+- Amazon Elastic Container Registry documentation  
+  https://docs.aws.amazon.com/AmazonECR/latest/userguide/what-is-ecr.html
+
+- Authenticating Docker to ECR  
+  https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry_auth.html
+
+### Terraform
+- Terraform documentation  
+  https://developer.hashicorp.com/terraform/docs
+
+- AWS Provider for Terraform  
+  https://registry.terraform.io/providers/hashicorp/aws/latest/docs
+
+- terraform-aws-modules VPC module  
+  https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/latest
+
+### Logging & Monitoring
+- CloudWatch Logs for Amazon ECS  
+  https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_cloudwatch_logs.html
